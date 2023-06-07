@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useSignup } from "../../hooks/useSignup";
 import styles from "./Signup.module.css";
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
+  const { error, isPending, signup } = useSignup();
 
   const handleData = (event) => {
     if (event.target.type === 'email') {
@@ -18,7 +20,7 @@ export default function Signup() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(email, password)
+    signup(email, password, displayName);
   }
 
   return (
